@@ -12,21 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class CheckboxesTest {
+public class DropdownTest {
 
     WebDriver driver;
-    List<WebElement> checkboxes = new ArrayList<>();
+    List<WebElement> dropDown = new ArrayList<>();
 
     @BeforeMethod
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://the-internet.herokuapp.com/checkboxes");
-        checkboxes = driver.findElements(By.cssSelector("[type=checkbox]"));
+        driver.get("http://the-internet.herokuapp.com/dropdown");
+        dropDown = driver.findElements(By.xpath("//*[@id=\"dropdown\"]/option"));
     }
 
     @AfterMethod
@@ -35,26 +35,20 @@ public class CheckboxesTest {
     }
 
     @Test
-    public void Checkbox1Unchecked() {
-        assertFalse(checkboxes.get(0).isSelected());
+    public void dropDownItemsAreExist() {
+        assertEquals(dropDown.size(),3);
     }
 
     @Test
-    public void Checkbox1Checked() {
-        checkboxes.get(0).click();
-        assertTrue(checkboxes.get(0).isSelected());
-
+    public void option1Selected(){
+        dropDown.get(1).click();
+        assertTrue(dropDown.get(1).isSelected());
     }
 
     @Test
-    public void Checkbox2Checked() {
-        assertTrue(checkboxes.get(1).isSelected());
-    }
-
-    @Test
-    public void Checkbox2Unchecked() {
-        checkboxes.get(1).click();
-        assertFalse(checkboxes.get(1).isSelected());
+    public void option2Selected(){
+        dropDown.get(2).click();
+        assertTrue(dropDown.get(2).isSelected());
     }
 
 }
