@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class AddRemoveElements {
+import static org.testng.Assert.assertEquals;
+
+public class AddRemoveElementsTest {
 
     WebDriver driver;
     WebElement buttonAdd, buttonRemove;
@@ -39,7 +41,7 @@ public class AddRemoveElements {
         buttonRemove = driver.findElement(By.xpath("//*[@id=\"elements\"]/button[2]"));
         buttonRemove.click();
         buttonStack = driver.findElements(By.cssSelector("[class=added-manually]"));
-        Assert.assertEquals(buttonStack.size(),1);
+        assertEquals(buttonStack.size(),1);
     }
 
 }
