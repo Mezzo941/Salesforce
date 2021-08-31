@@ -25,7 +25,7 @@ public class TableTest {
         driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://the-internet.herokuapp.com/tables#delete");
-        for (int i = 1; i < emails.length; i++) {
+        for (int i = 1; i < emails.length + 1; i++) {
             cellsValues.add(driver.findElement(By.xpath("//*[@id=\"table1\"]/tbody/tr[" + i + "]/td[3]")).getText());
         }
     }

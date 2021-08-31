@@ -17,10 +17,11 @@ public class AddRemoveElementsTest {
 
     WebDriver driver;
     WebElement buttonAdd, buttonRemove;
-    List<WebElement> buttonStack = new ArrayList<>();
+    List<WebElement> buttonStack;
 
     @BeforeMethod
     public void setup() {
+        buttonStack = new ArrayList<>();
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

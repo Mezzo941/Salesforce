@@ -16,14 +16,13 @@ public class InputsTest {
     WebDriver driver;
     WebElement inputs;
 
-
     @BeforeMethod
     public void setup() {
+        inputs = driver.findElement(By.cssSelector("[type=number]"));
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://the-internet.herokuapp.com/inputs");
-        inputs = driver.findElement(By.cssSelector("[type=number]"));
     }
 
     @AfterMethod
@@ -62,6 +61,5 @@ public class InputsTest {
         String content = inputs.getAttribute("value");
         Assert.assertEquals(content, "");
     }
-
 
 }

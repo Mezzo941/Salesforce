@@ -18,10 +18,11 @@ import static org.testng.Assert.assertTrue;
 public class DropdownTest {
 
     WebDriver driver;
-    List<WebElement> dropDown = new ArrayList<>();
+    List<WebElement> dropDown;
 
     @BeforeMethod
     public void setup() {
+        dropDown = new ArrayList<>();
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
