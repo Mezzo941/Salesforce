@@ -2,7 +2,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PositiveValidationTests extends BaseTest{
+public class PositiveValidationTest extends BaseTest{
 
     @Test
     public void lockedUserCantlogin(){

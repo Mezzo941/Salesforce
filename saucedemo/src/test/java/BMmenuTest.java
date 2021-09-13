@@ -19,27 +19,27 @@ public class BMmenuTest extends BaseTest {
         driver.findElement(By.id("item_4_title_link")).click();
         driver.findElement(By.id("react-burger-menu-btn")).click();
         driver.findElement(By.id("inventory_sidebar_link")).click();
-        Assert.assertEquals(driver.findElement(By.cssSelector("[class=title]")).getText(),"PRODUCTS");
+        Assert.assertEquals(driver.findElement(By.cssSelector("[class=title]")).getText(), "PRODUCTS");
     }
 
     @Test
-    public void aboutHaveOpened(){
+    public void aboutHaveOpened() {
         loginToThePersonalAccount();
         driver.findElement(By.id("react-burger-menu-btn")).click();
         driver.findElement(By.id("about_sidebar_link")).click();
-        Assert.assertEquals(driver.getCurrentUrl(),"https://saucelabs.com/");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://saucelabs.com/");
     }
 
     @Test
-    public void LogoutIsSuccess(){
+    public void LogoutIsSuccess() {
         loginToThePersonalAccount();
         driver.findElement(By.id("react-burger-menu-btn")).click();
         driver.findElement(By.id("logout_sidebar_link")).click();
-        Assert.assertEquals(driver.getCurrentUrl(),"https://www.saucedemo.com/");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
     }
 
     @Test
-    public void resetAppStateIsWorking(){
+    public void resetAppStateIsWorking() {
         //нет требований, а так есть баг
     }
 }

@@ -2,7 +2,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class NegativeValidationTests extends BaseTest {
+public class NegativeValidationTest extends BaseTest {
 
     @Test
     public void LoginWithEmptyPasswordIsImpossible() {
