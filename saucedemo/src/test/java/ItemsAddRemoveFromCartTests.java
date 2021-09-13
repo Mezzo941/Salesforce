@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -71,6 +72,14 @@ public class ItemsAddRemoveFromCartTests extends BaseTest {
         driver.findElement(By.id("remove-sauce-labs-backpack")).click();
         driver.findElement(By.id("continue-shopping")).click();
         Assert.assertEquals(driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).getText(),"ADD TO CART");
+    }
+
+    @Test
+    public void checkoutWithEmptyCartIsImpossible(){
+        loginToThePersonalAccount();
+        driver.findElement(By.id("shopping_cart_container")).click();
+        driver.findElement(By.id("checkout")).click();
+        Assert.assertEquals(driver.findElements(By.xpath("//*[text()='You cunt)) make an order with empty cart']")).size(),1);
     }
 
 }
