@@ -2,7 +2,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class BMmenuTests extends BaseTest {
+public class BMmenuTest extends BaseTest {
 
     public void loginToThePersonalAccount() {
 
