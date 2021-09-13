@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class NegativeValidationTests extends BaseTest {
 
     @Test
-    public void LoginWithEmptyUsernameIsImpossible() {
+    public void LoginWithEmptyPasswordIsImpossible() {
         driver.get("https://www.saucedemo.com");
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
         driver.findElement(By.id("login-button")).click();
