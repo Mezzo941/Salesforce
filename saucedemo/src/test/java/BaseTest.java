@@ -14,13 +14,13 @@ public class BaseTest {
     @BeforeMethod
     public void setup(){
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(new ChromeOptions().addArguments());
+        driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterMethod(alwaysRun = true)
     public void end(){
-        //driver.quit();
+        driver.quit();
     }
 
 }
