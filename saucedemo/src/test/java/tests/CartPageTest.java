@@ -16,8 +16,17 @@ public class CartPageTest extends BaseTest {
         catalogPage.openCart();
         Assert.assertTrue(cartPage.isOpened());
         Assert.assertTrue(cartPage.isItemIntoTheCart(SAUCE_LABS_BACKPACK.getName()));
-        cartPage.RemoveItemFromTheCartButton(SAUCE_LABS_BACKPACK.getName());
+        Assert.assertEquals(cartPage.getItemPriceFromTheCart(SAUCE_LABS_BACKPACK.getName()),SAUCE_LABS_BACKPACK.getPrice());
+        cartPage.removeItemFromTheCartButton(SAUCE_LABS_BACKPACK.getName());
         isItemRemovedFastAssert(SAUCE_LABS_BACKPACK.getName());
     }
+
+    /*@Test
+    public void checkoutWithEmptyCartIsImpossible() {
+        loginToThePersonalAccount();
+        driver.findElement(By.id("shopping_cart_container")).click();
+        driver.findElement(By.id("checkout")).click();
+        Assert.assertEquals(driver.findElements(By.xpath("//*[text()='You can't make an order with empty cart']")).size(), 1);
+    }*/
 
 }

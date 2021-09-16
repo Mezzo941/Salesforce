@@ -9,7 +9,7 @@ import static pages.Item.*;
 public class CatalogPageTest extends BaseTest {
 
     @Test
-    public void itemsSuccessfulAddedToCart() {
+    public void oneItemsSuccessfulAddedToTheCart() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
         Assert.assertTrue(catalogPage.isOpened());
@@ -17,6 +17,7 @@ public class CatalogPageTest extends BaseTest {
         catalogPage.openCart();
         Assert.assertTrue(cartPage.isOpened());
         Assert.assertTrue(cartPage.isItemIntoTheCart(SAUCE_LABS_BACKPACK.getName()));
+        Assert.assertEquals(cartPage.getItemPriceFromTheCart(SAUCE_LABS_BACKPACK.getName()), SAUCE_LABS_BACKPACK.getPrice());
     }
 
     @Test
@@ -25,7 +26,6 @@ public class CatalogPageTest extends BaseTest {
         loginPage.authorization("standard_user", "secret_sauce");
         Assert.assertTrue(catalogPage.isOpened());
         catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
-        //Thread.sleep(5000);
         catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
         catalogPage.openCart();
         Assert.assertTrue(cartPage.isOpened());
@@ -45,27 +45,42 @@ public class CatalogPageTest extends BaseTest {
         Assert.assertTrue(cartPage.isOpened());
         for (Item item : itemsArray) {
             Assert.assertTrue(cartPage.isItemIntoTheCart(item.getName()));
+            Assert.assertEquals(cartPage.getItemPriceFromTheCart(item.getName()), item.getPrice());
         }
-
     }
 
     @Test
+    public void threeRandomItemsSuccessfulAddedToTheCart() {
+        Item[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT,SAUCE_LABS_BOLT_TSHIRT};
+        loginPage.open();
+        loginPage.authorization("standard_user", "secret_sauce");
+        Assert.assertTrue(catalogPage.isOpened());
+        for (Item item : threeRandomItemsArray) {
+            catalogPage.addOrRemoveItemFromCart(item.getName());
+        }
+        catalogPage.openCart();
+        Assert.assertTrue(cartPage.isOpened());
+        for (Item item : threeRandomItemsArray) {
+            Assert.assertTrue(cartPage.isItemIntoTheCart(item.getName()));
+            Assert.assertEquals(cartPage.getItemPriceFromTheCart(item.getName()), item.getPrice());
+        }
+    }
+}
+
+
+ /*   @Test
     public void buttonAddSwitchToRemoveAfterClick() {
-        /*loginToThePersonalAccount();
+        loginToThePersonalAccount();
         driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).click();
         Assert.assertEquals(driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).getText(), "REMOVE");
         driver.findElement(By.id("shopping_cart_container")).click();
         driver.findElement(By.id("remove-sauce-labs-backpack")).click();
         driver.findElement(By.id("continue-shopping")).click();
-        Assert.assertEquals(driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).getText(), "ADD TO CART");*/
+        Assert.assertEquals(driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).getText(), "ADD TO CART");
     }
 
-    @Test
-    public void checkoutWithEmptyCartIsImpossible() {
-        /*loginToThePersonalAccount();
-        driver.findElement(By.id("shopping_cart_container")).click();
-        driver.findElement(By.id("checkout")).click();
-        Assert.assertEquals(driver.findElements(By.xpath("//*[text()='You can't make an order with empty cart']")).size(), 1);*/
-    }
+  */
 
-}
+
+
+

@@ -10,7 +10,7 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    public void RemoveItemFromTheCartButton(String item) {
+    public void removeItemFromTheCartButton(String item) {
         driver.findElement(By.xpath("//*[contains(text(),'" + item + "')]/" +
                 "ancestor::div[@class='cart_item_label']//button")).click();   //почему не находит с 1 слешом перед баттоном если баттон прямо в диве?
     }
