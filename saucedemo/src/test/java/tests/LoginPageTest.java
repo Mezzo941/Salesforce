@@ -9,7 +9,7 @@ public class LoginPageTest extends BaseTest{
     public void ValidDataUserSuccessfulLogin(){
         loginPage.open();
         loginPage.authorization("standard_user","secret_sauce");
-        Assert.assertTrue(catalogPage.isPageOpened());
+        Assert.assertTrue(catalogPage.isOpened());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class LoginPageTest extends BaseTest{
 
     @Test
     public void LoginWithEmptyPasswordIsImpossible() {
-
+        loginPage.open();
         loginPage.authorization("standard_user","");
         Assert.assertEquals(loginPage.getDynamicError(), "Epic sadface: Password is required");
     }
