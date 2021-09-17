@@ -11,18 +11,16 @@ public class CatalogPage extends BasePage {
         super(driver);
     }
 
-    public By getItemsPath(String itemName) {
+    public By getItemsAddButtonPath(String itemName) {
         return By.xpath("//*[text()='" + itemName + "']/ancestor::*[@class = 'inventory_item']//button");
     }
 
     public void addOrRemoveItemFromCart(String itemName) {
-        driver.findElement(getItemsPath(itemName)).click();
+        driver.findElement(getItemsAddButtonPath(itemName)).click();
     }
 
     public void openCart() {
         driver.findElement(CART_BUTON).click();
     }
 
-
 }
-//*[contains(text(),'Sauce Labs Bike Light')]/ancestor::div[@class='cart_item_label']//button

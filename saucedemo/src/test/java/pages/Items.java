@@ -1,6 +1,6 @@
 package pages;
 
-public enum Item {
+public enum Items {
 
     SAUCE_LABS_BACKPACK("Sauce Labs Backpack",29.99),
     SAUCE_LABS_BIKE_LIGHT("Sauce Labs Bike Light", 9.99),
@@ -12,7 +12,7 @@ public enum Item {
     String itemname;
     double price;
 
-    Item(String itemname, double price) {
+    Items(String itemname, double price) {
         this.itemname = itemname;
         this.price = price;
     }

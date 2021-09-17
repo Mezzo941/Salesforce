@@ -2,84 +2,82 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.Item;
+import pages.Items;
 
-import static pages.Item.*;
+import static pages.Items.*;
 
 public class CatalogPageTest extends BaseTest {
 
     @Test
-    public void oneItemsSuccessfulAddedToTheCart() {
+    public void oneItemAddedToTheCart() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened());
+        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
         catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
         catalogPage.openCart();
-        Assert.assertTrue(cartPage.isOpened());
-        Assert.assertTrue(cartPage.isItemIntoTheCart(SAUCE_LABS_BACKPACK.getName()));
-        Assert.assertEquals(cartPage.getItemPriceFromTheCart(SAUCE_LABS_BACKPACK.getName()), SAUCE_LABS_BACKPACK.getPrice());
+        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
+        Assert.assertTrue(cartPage.isItemIntoThePage(SAUCE_LABS_BACKPACK.getName()));
+        Assert.assertEquals(cartPage.getItemPriceFromThePage(SAUCE_LABS_BACKPACK.getName()), SAUCE_LABS_BACKPACK.getPrice());
+    }
+
+
+    @Test
+    public void allItemsAddedToTheCart() {
+        Items[] itemsArray = Items.values();
+        loginPage.open();
+        loginPage.authorization("standard_user", "secret_sauce");
+        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
+        for (Items items : itemsArray) {
+            catalogPage.addOrRemoveItemFromCart(items.getName());
+        }
+        catalogPage.openCart();
+        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
+        for (Items items : itemsArray) {
+            Assert.assertTrue(cartPage.isItemIntoThePage(items.getName()));
+            Assert.assertEquals(cartPage.getItemPriceFromThePage(items.getName()), items.getPrice());
+        }
+    }
+
+    @Test
+    public void threeRandomItemsAddedToTheCart() {
+        Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT,SAUCE_LABS_BOLT_TSHIRT};
+        loginPage.open();
+        loginPage.authorization("standard_user", "secret_sauce");
+        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
+        for (Items items : threeRandomItemsArray) {
+            catalogPage.addOrRemoveItemFromCart(items.getName());
+        }
+        catalogPage.openCart();
+        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
+        for (Items items : threeRandomItemsArray) {
+            Assert.assertTrue(cartPage.isItemIntoThePage(items.getName()));
+            Assert.assertEquals(cartPage.getItemPriceFromThePage(items.getName()), items.getPrice());
+        }
     }
 
     @Test
     public void twoTimesUseAddItemButtonWillRemoveItemFromTheCart() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened());
-        catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
+        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
         catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
         catalogPage.openCart();
-        Assert.assertTrue(cartPage.isOpened());
-        isItemRemovedFastAssert(SAUCE_LABS_BACKPACK.getName());
+        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
+        Assert.assertTrue(cartPage.isItemIntoThePage(SAUCE_LABS_BACKPACK.getName()));
+        cartPage.continueShopping();
+        catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
+        catalogPage.openCart();
+        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
+        fastAssert(true,cartPage.isItemRemoved(SAUCE_LABS_BACKPACK.getName()));
     }
 
-    @Test
-    public void allItemsFromTheCatalogAddedToTheCart() {
-        Item[] itemsArray = Item.values();
-        loginPage.open();
-        loginPage.authorization("standard_user", "secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened());
-        for (Item item : itemsArray) {
-            catalogPage.addOrRemoveItemFromCart(item.getName());
-        }
-        catalogPage.openCart();
-        Assert.assertTrue(cartPage.isOpened());
-        for (Item item : itemsArray) {
-            Assert.assertTrue(cartPage.isItemIntoTheCart(item.getName()));
-            Assert.assertEquals(cartPage.getItemPriceFromTheCart(item.getName()), item.getPrice());
-        }
-    }
-
-    @Test
-    public void threeRandomItemsSuccessfulAddedToTheCart() {
-        Item[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT,SAUCE_LABS_BOLT_TSHIRT};
-        loginPage.open();
-        loginPage.authorization("standard_user", "secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened());
-        for (Item item : threeRandomItemsArray) {
-            catalogPage.addOrRemoveItemFromCart(item.getName());
-        }
-        catalogPage.openCart();
-        Assert.assertTrue(cartPage.isOpened());
-        for (Item item : threeRandomItemsArray) {
-            Assert.assertTrue(cartPage.isItemIntoTheCart(item.getName()));
-            Assert.assertEquals(cartPage.getItemPriceFromTheCart(item.getName()), item.getPrice());
-        }
-    }
 }
 
 
- /*   @Test
-    public void buttonAddSwitchToRemoveAfterClick() {
-        loginToThePersonalAccount();
-        driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).click();
-        Assert.assertEquals(driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).getText(), "REMOVE");
-        driver.findElement(By.id("shopping_cart_container")).click();
-        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
-        driver.findElement(By.id("continue-shopping")).click();
-        Assert.assertEquals(driver.findElement(By.xpath(itemsAddRemoveButtonsPaths[0])).getText(), "ADD TO CART");
-    }
 
-  */
+
+
+
 
 
 

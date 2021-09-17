@@ -9,11 +9,11 @@ public class LoginPageTest extends BaseTest{
     public void ValidDataUserSuccessfulLogin(){
         loginPage.open();
         loginPage.authorization("standard_user","secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened());
+        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
     }
 
     @Test
-    public void lockedUserCantlogin(){
+    public void lockedUserCantLogin(){
         loginPage.open();
         loginPage.authorization("locked_out_user","secret_sauce");
         Assert.assertEquals(loginPage.getDynamicError(), "Epic sadface: Sorry, this user has been locked out.");

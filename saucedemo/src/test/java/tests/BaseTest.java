@@ -7,9 +7,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.CartPage;
-import pages.CatalogPage;
-import pages.LoginPage;
+import pages.*;
+
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
@@ -18,27 +17,34 @@ public abstract class BaseTest {
     protected LoginPage loginPage;
     protected CatalogPage catalogPage;
     protected CartPage cartPage;
-    protected CatalogPageTest catalogPageTest;
+    protected CheckoutStepOnePage checkoutStepOnePage;
+    protected CheckoutStepTwoPage checkoutStepTwoPage;
 
     @BeforeMethod
-    public void setup()  {
+    public void setup() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(new ChromeOptions().addArguments("maximized"));
+        driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
         catalogPage = new CatalogPage(driver);
         cartPage = new CartPage(driver);
+        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        ///driver.quit();
+        driver.quit();
     }
 
 
-    public void isItemRemovedFastAssert(String item){
+    public void fastAssert(boolean assertType, boolean result) {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        Assert.assertTrue(cartPage.isItemRemoved(item));
+        if (assertType) {
+            Assert.assertTrue(result);
+        } else {
+            Assert.assertFalse(result);
+        }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
