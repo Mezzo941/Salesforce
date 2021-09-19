@@ -5,11 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-    static final By NO_VALID_DATE_DYNAMIC_ERRORS = By.cssSelector("[data-test=error]");
-
     private static final By USER_NAME = By.id("user-name");
     private static final By PASSWORD = By.id("password");
     private static final By LOGIN_BUTTON = By.id("login-button");
+    private static final By NO_VALID_DATE_DYNAMIC_ERRORS = By.cssSelector("[data-test=error]");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -25,9 +24,7 @@ public class LoginPage extends BasePage {
         driver.findElement(LOGIN_BUTTON).click();
     }
 
-
-    public String getDynamicError()
-    {
+    public String getDynamicError() {
         return driver.findElement(NO_VALID_DATE_DYNAMIC_ERRORS).getText();
     }
 }

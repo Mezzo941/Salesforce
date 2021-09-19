@@ -39,13 +39,12 @@ public abstract class BaseTest {
 
 
     public void fastAssert(boolean assertType, boolean result) {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         if (assertType) {
             Assert.assertTrue(result);
         } else {
             Assert.assertFalse(result);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
 }

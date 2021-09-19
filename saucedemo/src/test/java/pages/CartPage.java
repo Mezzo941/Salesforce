@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class CartPage extends BasePage {
 
     static final By CONTINUE_BUTTON = By.id("continue-shopping");
@@ -26,7 +28,8 @@ public class CartPage extends BasePage {
     }
 
     public boolean isItemRemoved(String item) {
-        return !isItemIntoThePage(item);
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        return !isItemOnThePage(item);
     }
 
 }

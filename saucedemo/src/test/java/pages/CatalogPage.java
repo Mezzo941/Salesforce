@@ -11,12 +11,12 @@ public class CatalogPage extends BasePage {
         super(driver);
     }
 
-    public By getItemsAddButtonPath(String itemName) {
+    public By getItemsAddButton(String itemName) {
         return By.xpath("//*[text()='" + itemName + "']/ancestor::*[@class = 'inventory_item']//button");
     }
 
     public void addOrRemoveItemFromCart(String itemName) {
-        driver.findElement(getItemsAddButtonPath(itemName)).click();
+        driver.findElement(getItemsAddButton(itemName)).click();
     }
 
     public void openCart() {

@@ -11,11 +11,11 @@ public class CartPageTest extends BaseTest {
     public void oneItemRemovedFromTheCart() {
         loginPage.open();
         loginPage.authorization("standard_user","secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
+        Assert.assertTrue(catalogPage.isOpened());
         catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
         catalogPage.openCart();
-        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
-        Assert.assertTrue(cartPage.isItemIntoThePage(SAUCE_LABS_BACKPACK.getName()));
+        Assert.assertTrue(cartPage.isOpened());
+        Assert.assertTrue(cartPage.isItemOnThePage(SAUCE_LABS_BACKPACK.getName()));
         Assert.assertEquals(cartPage.getItemPriceFromThePage(SAUCE_LABS_BACKPACK.getName()),SAUCE_LABS_BACKPACK.getPrice());
         cartPage.removeItemFromTheCart(SAUCE_LABS_BACKPACK.getName());
         fastAssert(true,cartPage.isItemRemoved(SAUCE_LABS_BACKPACK.getName()));
@@ -26,14 +26,14 @@ public class CartPageTest extends BaseTest {
         Items[] itemsArray = Items.values();
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
+        Assert.assertTrue(catalogPage.isOpened());
         for (Items items : itemsArray) {
             catalogPage.addOrRemoveItemFromCart(items.getName());
         }
         catalogPage.openCart();
-        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
+        Assert.assertTrue(cartPage.isOpened());
         for (Items items : itemsArray) {
-            Assert.assertTrue(cartPage.isItemIntoThePage(items.getName()));
+            Assert.assertTrue(cartPage.isItemOnThePage(items.getName()));
             Assert.assertEquals(cartPage.getItemPriceFromThePage(items.getName()), items.getPrice());
         }
         for (Items items : itemsArray) {
@@ -49,14 +49,14 @@ public class CartPageTest extends BaseTest {
         Items[] itemsArray = Items.values();
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
+        Assert.assertTrue(catalogPage.isOpened());
         catalogPage.openCart();
-        Assert.assertTrue(cartPage.isOpened("YOUR CART"));
+        Assert.assertTrue(cartPage.isOpened());
         for (Items items : itemsArray) {
-            Assert.assertFalse(cartPage.isItemIntoThePage(items.getName()));
+            Assert.assertFalse(cartPage.isItemOnThePage(items.getName()));
         }
         cartPage.checkout();
-        fastAssert(false,checkoutStepOnePage.isOpened("CHECKOUT: YOUR INFORMATION"));
+        fastAssert(false,checkoutStepOnePage.isOpened());
     }
 
 }
