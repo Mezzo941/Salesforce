@@ -19,33 +19,34 @@ public abstract class BaseTest {
     protected CartPage cartPage;
     protected CheckoutStepOnePage checkoutStepOnePage;
     protected CheckoutStepTwoPage checkoutStepTwoPage;
+    protected CompletePage completePage;
 
     @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
+        driver = new ChromeDriver(new ChromeOptions().addArguments());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
         catalogPage = new CatalogPage(driver);
         cartPage = new CartPage(driver);
         checkoutStepOnePage = new CheckoutStepOnePage(driver);
         checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
+        completePage = new CompletePage(driver);
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+        //driver.quit();
     }
 
 
     public void fastAssert(boolean assertType, boolean result) {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         if (assertType) {
             Assert.assertTrue(result);
         } else {
             Assert.assertFalse(result);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
 }

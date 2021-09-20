@@ -9,7 +9,7 @@ public class LoginPageTest extends BaseTest{
     public void ValidDataUserSuccessfulLogin(){
         loginPage.open();
         loginPage.authorization("standard_user","secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened("PRODUCTS"));
+        Assert.assertTrue(catalogPage.isOpened());
     }
 
     @Test
