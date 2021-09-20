@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class CatalogPage extends BasePage {
 
-    static final By CART_BUTON = By.className("shopping_cart_link");
+    private static final By CART_BUTTON = By.className("shopping_cart_link");
 
     public CatalogPage(WebDriver driver) {
         super(driver);
@@ -20,7 +20,7 @@ public class CatalogPage extends BasePage {
     }
 
     public void openCart() {
-        driver.findElement(CART_BUTON).click();
+        driver.findElement(CART_BUTTON).click();
     }
 
 }

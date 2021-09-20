@@ -32,9 +32,9 @@ public abstract class BasePage {
         else if (title.equals("CHECKOUT: OVERVIEW") && this instanceof CheckoutStepTwoPage) {
             return true;
         }
-        /*else if (title.equals("CHECKOUT: COMPLETE!") && this instanceof CheckoutStepTwoPage) {
+        else if (title.equals("CHECKOUT: COMPLETE!") && this instanceof CompletePage) {
             return true;
-        }*/
+        }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return false;
     }
@@ -49,14 +49,13 @@ public abstract class BasePage {
     }
 
     public double getItemPriceFromThePage(String item) {
-        double price;
         try {
-            price = Double.parseDouble(driver.findElement(By.xpath("//*[contains(text(),'" + item + "')]/" +
+            return Double.parseDouble(driver.findElement(By.xpath("//*[contains(text(),'" + item + "')]/" +
                     "ancestor::div[@class='cart_item_label']//*" +
                     "[@class='inventory_item_price']")).getText().substring(1));
         } catch (NoSuchElementException exception) {
-            price = 0.0;
+            return 0.0;
         }
-        return price;
     }
+
 }

@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 public class CartPage extends BasePage {
 
-    static final By CONTINUE_BUTTON = By.id("continue-shopping");
-    static final By CHECK_OUT_BUTTON = By.id("checkout");
+    private static final By CONTINUE_BUTTON = By.id("continue-shopping");
+    private static final By CHECK_OUT_BUTTON = By.id("checkout");
 
     public CartPage(WebDriver driver) {
         super(driver);
