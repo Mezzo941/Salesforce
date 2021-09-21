@@ -20,7 +20,6 @@ public class CatalogPageTest extends BaseTest {
         Assert.assertEquals(cartPage.getItemPriceFromThePage(SAUCE_LABS_BACKPACK.getName()), SAUCE_LABS_BACKPACK.getPrice());
     }
 
-
     @Test
     public void allItemsAddedToTheCart() {
         Items[] itemsArray = Items.values();
@@ -40,7 +39,7 @@ public class CatalogPageTest extends BaseTest {
 
     @Test
     public void threeRandomItemsAddedToTheCart() {
-        Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT,SAUCE_LABS_BOLT_TSHIRT};
+        Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
         Assert.assertTrue(catalogPage.isOpened());
@@ -68,7 +67,7 @@ public class CatalogPageTest extends BaseTest {
         catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
         catalogPage.openCart();
         Assert.assertTrue(cartPage.isOpened());
-        fastAssert(true,cartPage.isItemRemoved(SAUCE_LABS_BACKPACK.getName()));
+        Assert.assertTrue(cartPage.isCartEmpty());
     }
 
 }

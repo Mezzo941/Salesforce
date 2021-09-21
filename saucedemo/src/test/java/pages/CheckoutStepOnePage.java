@@ -3,7 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CheckoutStepOnePage extends BasePage{
+public class CheckoutStepOnePage extends BasePage {
 
     private static final By FIRST_NAME = By.id("first-name");
     private static final By LAST_NAME = By.id("last-name");
@@ -15,14 +15,14 @@ public class CheckoutStepOnePage extends BasePage{
         super(driver);
     }
 
-    public void enterCheckoutInfoAndContinue(String firstName, String lastName, String postalCode){
+    public void enterCheckoutInfoAndContinue(String firstName, String lastName, String postalCode) {
         driver.findElement(FIRST_NAME).sendKeys(firstName);
         driver.findElement(LAST_NAME).sendKeys(lastName);
         driver.findElement(POSTAL_CODE).sendKeys(postalCode);
         driver.findElement(CONTINUE_BUTTON).click();
     }
 
-    public String getErrorMsg(){
+    public String getErrorMsg() {
         return driver.findElement(DYNAMIC_ERROR_MSG).getText();
     }
 

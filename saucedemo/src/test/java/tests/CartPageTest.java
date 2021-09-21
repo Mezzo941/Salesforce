@@ -10,19 +10,19 @@ public class CartPageTest extends BaseTest {
     @Test
     public void oneItemRemovedFromTheCart() {
         loginPage.open();
-        loginPage.authorization("standard_user","secret_sauce");
+        loginPage.authorization("standard_user", "secret_sauce");
         Assert.assertTrue(catalogPage.isOpened());
         catalogPage.addOrRemoveItemFromCart(SAUCE_LABS_BACKPACK.getName());
         catalogPage.openCart();
         Assert.assertTrue(cartPage.isOpened());
         Assert.assertTrue(cartPage.isItemOnThePage(SAUCE_LABS_BACKPACK.getName()));
-        Assert.assertEquals(cartPage.getItemPriceFromThePage(SAUCE_LABS_BACKPACK.getName()),SAUCE_LABS_BACKPACK.getPrice());
+        Assert.assertEquals(cartPage.getItemPriceFromThePage(SAUCE_LABS_BACKPACK.getName()), SAUCE_LABS_BACKPACK.getPrice());
         cartPage.removeItemFromTheCart(SAUCE_LABS_BACKPACK.getName());
-        fastAssert(true,cartPage.isItemRemoved(SAUCE_LABS_BACKPACK.getName()));
+        Assert.assertTrue(cartPage.isCartEmpty());
     }
 
     @Test
-    public void allItemsRemovedFromTheCart(){
+    public void allItemsRemovedFromTheCart() {
         Items[] itemsArray = Items.values();
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
@@ -39,24 +39,28 @@ public class CartPageTest extends BaseTest {
         for (Items items : itemsArray) {
             cartPage.removeItemFromTheCart(items.getName());
         }
-        for (Items items : itemsArray) {
-            fastAssert(true,cartPage.isItemRemoved(items.getName()));
-        }
+        Assert.assertTrue(cartPage.isCartEmpty());
     }
 
     @Test
     public void checkoutWithEmptyCartIsImpossible() {
-        Items[] itemsArray = Items.values();
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
         Assert.assertTrue(catalogPage.isOpened());
         catalogPage.openCart();
         Assert.assertTrue(cartPage.isOpened());
-        for (Items items : itemsArray) {
-            Assert.assertFalse(cartPage.isItemOnThePage(items.getName()));
-        }
+        Assert.assertTrue(cartPage.isCartEmpty());
         cartPage.checkout();
-        fastAssert(false,checkoutStepOnePage.isOpened());
+        Assert.assertFalse(checkoutStepOnePage.isOpened());
+    }
+
+    @Test
+    public void check() {
+        loginPage.open();
+        loginPage.authorization("standard_user", "secret_sauce");
+        Assert.assertTrue(catalogPage.isOpened());
+        catalogPage.openCart();
+        cartPage.isItemOnThePage(SAUCE_LABS_BACKPACK.getName());
     }
 
 }
