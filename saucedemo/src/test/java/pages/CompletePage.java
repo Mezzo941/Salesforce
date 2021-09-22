@@ -1,9 +1,11 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CompletePage extends BasePage{
+public class CompletePage extends BasePage {
 
     private static final By COMPLETE_MSG = By.className("complete-header");
 
@@ -11,8 +13,13 @@ public class CompletePage extends BasePage{
         super(driver);
     }
 
-    public boolean isCompleteMsgShow(){
-        return driver.findElement(COMPLETE_MSG).isDisplayed();
+    public boolean isCompleteMsgShow() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(COMPLETE_MSG));
+        } catch (TimeoutException exception) {
+            return false;
+        }
+        return true;
     }
 
 }

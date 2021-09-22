@@ -24,7 +24,7 @@ public abstract class BaseTest {
     @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(new ChromeOptions().addArguments());
+        driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
         catalogPage = new CatalogPage(driver);
@@ -36,17 +36,7 @@ public abstract class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        //driver.quit();
-    }
-
-
-    public void fastAssert(boolean assertType, boolean result) {
-        if (assertType) {
-            Assert.assertTrue(result);
-        } else {
-            Assert.assertFalse(result);
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        }
+        driver.quit();
     }
 
 }
