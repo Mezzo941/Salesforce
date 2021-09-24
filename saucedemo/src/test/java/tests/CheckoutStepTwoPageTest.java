@@ -8,7 +8,7 @@ import static pages.Items.*;
 
 public class CheckoutStepTwoPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "check correct total price summed by all items prices before final checkout")
     public void isTotalCorrect() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
@@ -34,7 +34,7 @@ public class CheckoutStepTwoPageTest extends BaseTest {
         Assert.assertEquals(total, checkoutStepTwoPage.getTotal());
     }
 
-    @Test
+    @Test(description = "check correct tax that calculated from summed by all items prices before final checkout")
     public void isTaxCorrect() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
@@ -60,7 +60,7 @@ public class CheckoutStepTwoPageTest extends BaseTest {
         Assert.assertEquals(tax, checkoutStepTwoPage.getTax());
     }
 
-    @Test
+    @Test(description = "check correct total order price that calculated from summed tax and total items prices before final checkout")
     public void isTotalItemCorrect() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         Double totalPrice = 0.0;
@@ -87,7 +87,7 @@ public class CheckoutStepTwoPageTest extends BaseTest {
         Assert.assertEquals(checkoutStepTwoPage.getItemTotal(),totalPrice);
     }
 
-    @Test
+    @Test(description = "check success finishing the order")
     public void afterUseFinishButtonWillCompleteOrder(){
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();

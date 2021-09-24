@@ -8,7 +8,7 @@ import static pages.Items.*;
 
 public class CartPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "add 1 item and then remove it from the cart")
     public void oneItemRemovedFromTheCart() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
@@ -22,7 +22,7 @@ public class CartPageTest extends BaseTest {
         Assert.assertTrue(cartPage.isCartEmpty());
     }
 
-    @Test
+    @Test(description = "add all items and then remove it from the cart")
     public void allItemsRemovedFromTheCart() {
         Items[] itemsArray = Items.values();
         loginPage.open();
@@ -43,7 +43,7 @@ public class CartPageTest extends BaseTest {
         Assert.assertTrue(cartPage.isCartEmpty());
     }
 
-    @Test(/*enabled = false*/)
+    @Test(/*enabled = false , */ description = "try to complete checkout with empty cart")
     public void checkoutWithEmptyCartIsImpossible() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
