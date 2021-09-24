@@ -3,6 +3,7 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Items;
+
 import static pages.Items.*;
 
 public class CartPageTest extends BaseTest {
@@ -42,7 +43,7 @@ public class CartPageTest extends BaseTest {
         Assert.assertTrue(cartPage.isCartEmpty());
     }
 
-    @Test
+    @Test(/*enabled = false*/)
     public void checkoutWithEmptyCartIsImpossible() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
@@ -52,15 +53,6 @@ public class CartPageTest extends BaseTest {
         Assert.assertTrue(cartPage.isCartEmpty());
         cartPage.checkout();
         Assert.assertFalse(checkoutStepOnePage.isOpened());
-    }
-
-    @Test
-    public void check() {
-        loginPage.open();
-        loginPage.authorization("standard_user", "secret_sauce");
-        Assert.assertTrue(catalogPage.isOpened());
-        catalogPage.openCart();
-        cartPage.isItemOnThePage(SAUCE_LABS_BACKPACK.getName());
     }
 
 }

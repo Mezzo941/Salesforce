@@ -11,7 +11,7 @@ public class LoginPageTest extends BaseTest {
         return new Object[][]{
                 {"standard_user", "", "Epic sadface: Password is required"},
                 {"", "", "Epic sadface: Username is required"},
-                {"standard_user","standard_user","Epic sadface: Username and password do not match any user in this service"},
+                {"standard_user", "standard_user", "Epic sadface: Username and password do not match any user in this service"},
         };
     }
 
@@ -31,11 +31,10 @@ public class LoginPageTest extends BaseTest {
 
 
     @Test(dataProvider = "noValidData")
-    public void noValidDataInputBreakSuccess(String userName,String lastName, String error) {
+    public void noValidDataInputBreakSuccess(String userName, String lastName, String error) {
         loginPage.open();
-        loginPage.authorization(userName,lastName);
+        loginPage.authorization(userName, lastName);
         Assert.assertEquals(loginPage.getDynamicError(), error);
     }
-
 
 }
