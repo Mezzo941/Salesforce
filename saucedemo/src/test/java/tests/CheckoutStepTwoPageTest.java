@@ -87,7 +87,7 @@ public class CheckoutStepTwoPageTest extends BaseTest {
         Assert.assertEquals(checkoutStepTwoPage.getItemTotal(),totalPrice);
     }
 
-    @Test(description = "check success finishing the order")
+    @Test(description = "check success finishing the order", groups = "smoke")
     public void afterUseFinishButtonWillCompleteOrder(){
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();

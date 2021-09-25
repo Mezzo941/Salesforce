@@ -4,7 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
+import org.openqa.selenium.opera.OperaDriver;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.annotations.*;
@@ -23,10 +23,16 @@ public abstract class BaseTest {
     protected CheckoutStepTwoPage checkoutStepTwoPage;
     protected CompletePage completePage;
 
-    @BeforeMethod
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
+    @Parameters("browser")
+    @BeforeMethod(alwaysRun = true)
+    public void setup(@Optional("chrome") String browser) {
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
+        } else if (browser.equalsIgnoreCase("opera")) {
+            WebDriverManager.operadriver().setup();
+            driver = new OperaDriver(/*new OperaOptions().addArguments("headless")*/);
+        }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
         catalogPage = new CatalogPage(driver);
@@ -36,13 +42,14 @@ public abstract class BaseTest {
         completePage = new CompletePage(driver);
     }
 
+
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }
 
     @BeforeClass(alwaysRun = true)
-    public void setupSuite(ITestContext context){
+    public void setupSuite(ITestContext context) {
         for (ITestNGMethod method : context.getAllTestMethods()) {
             method.setRetryAnalyzerClass(Retry.class);
         }

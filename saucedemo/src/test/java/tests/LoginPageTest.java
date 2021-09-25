@@ -30,7 +30,7 @@ public class LoginPageTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "getData", description = "use invalid data for login")
+    @Test(dataProvider = "noValidData", description = "use invalid data for login")
     public void noValidDataInputBreakSuccess(String user, String password, String error) {
         loginPage.open();
         loginPage.authorization(user, password);

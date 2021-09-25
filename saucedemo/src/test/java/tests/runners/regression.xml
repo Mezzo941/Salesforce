@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="regression suite" parallel="tests" thread-count="4">
+
+    <test verbose="2" name="E:/Projects/saucedemo/src/test/resources">
+        <classes/>
+    </test>
+
+    <test name="thread1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginPageTest"/>
+            <class name="tests.CatalogPageTest"/>
+            <class name="tests.CartPageTest"/>
+        </classes>
+    </test>
+
+    <test name="thread2">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.CheckoutStepOnePageTest"/>
+            <class name="tests.CheckoutStepTwoPageTest"/>
+        </classes>
+    </test>
+
+    <test name="thread3">
+        <parameter name="browser" value="opera"/>
+        <classes>
+            <class name="tests.LoginPageTest"/>
+            <class name="tests.CatalogPageTest"/>
+            <class name="tests.CartPageTest"/>
+        </classes>
+    </test>
+
+    <test name="thread4">
+        <parameter name="browser" value="opera"/>
+        <classes>
+            <class name="tests.CheckoutStepOnePageTest"/>
+            <class name="tests.CheckoutStepTwoPageTest"/>
+        </classes>
+    </test>
+
+
+
+</suite>

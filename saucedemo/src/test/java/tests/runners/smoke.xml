@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="smoke suite" parallel="tests" thread-count="2">
+
+    <test verbose="2" name="E:/Projects/saucedemo/src/test/java/tests/runners">
+        <classes/>
+    </test>
+
+
+    <test name="smokeChrome">
+        <parameter name="browser" value="chrome"/>
+       <groups>
+           <run>
+               <include name="smoke"/>
+           </run>
+       </groups>
+
+        <classes>
+            <class name="tests.CheckoutStepTwoPageTest"/>
+        </classes>
+    </test>
+
+    <test name="smokeOpera">
+        <parameter name="browser" value="opera"/>
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="tests.CheckoutStepTwoPageTest"/>
+        </classes>
+    </test>
+
+</suite>
