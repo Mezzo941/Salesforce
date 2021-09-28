@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.opera.OperaDriver;
-import org.testng.ITestContext;
-import org.testng.ITestNGMethod;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -24,14 +22,14 @@ public abstract class BaseTest {
     protected CompletePage completePage;
 
     @Parameters("browser")
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(groups = "smoke")
     public void setup(@Optional("chrome") String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
         } else if (browser.equalsIgnoreCase("opera")) {
             WebDriverManager.operadriver().setup();
-            driver = new OperaDriver(/*new OperaOptions().addArguments("headless")*/);
+            driver = new OperaDriver();
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
@@ -43,16 +41,9 @@ public abstract class BaseTest {
     }
 
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, groups = "smoke")
     public void tearDown() {
         driver.quit();
-    }
-
-    @BeforeClass(alwaysRun = true)
-    public void setupSuite(ITestContext context) {
-        for (ITestNGMethod method : context.getAllTestMethods()) {
-            method.setRetryAnalyzerClass(Retry.class);
-        }
     }
 
 }

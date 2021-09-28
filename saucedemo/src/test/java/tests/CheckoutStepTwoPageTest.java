@@ -56,7 +56,7 @@ public class CheckoutStepTwoPageTest extends BaseTest {
             Assert.assertTrue(checkoutStepTwoPage.isItemOnThePage(items.getName()));
             Assert.assertEquals(checkoutStepTwoPage.getItemPriceFromThePage(items.getName()), items.getPrice());
         }
-        Double tax = checkoutStepTwoPage.getItemTotal()*0.08;
+        Double tax = checkoutStepTwoPage.getItemTotal() * 0.08;
         Assert.assertEquals(tax, checkoutStepTwoPage.getTax());
     }
 
@@ -84,11 +84,11 @@ public class CheckoutStepTwoPageTest extends BaseTest {
             Assert.assertTrue(checkoutStepTwoPage.isItemOnThePage(items.getName()));
             Assert.assertEquals(checkoutStepTwoPage.getItemPriceFromThePage(items.getName()), items.getPrice());
         }
-        Assert.assertEquals(checkoutStepTwoPage.getItemTotal(),totalPrice);
+        Assert.assertEquals(checkoutStepTwoPage.getItemTotal(), totalPrice);
     }
 
-    @Test(description = "check success finishing the order", groups = "smoke")
-    public void afterUseFinishButtonWillCompleteOrder(){
+    @Test(groups = "smoke", description = "check success finishing the order")
+    public void afterUseFinishButtonWillCompleteOrder() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");

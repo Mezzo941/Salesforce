@@ -2,9 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="regression suite" parallel="tests" thread-count="4">
 
-    <test verbose="2" name="E:/Projects/saucedemo/src/test/resources">
-        <classes/>
-    </test>
+    <listeners>
+        <listener class-name="tests.TestListener"/>
+        <listener class-name="tests.retry.AnnotationTransformer"/>
+    </listeners>
 
     <test name="thread1">
         <parameter name="browser" value="chrome"/>
@@ -39,7 +40,5 @@
             <class name="tests.CheckoutStepTwoPageTest"/>
         </classes>
     </test>
-
-
 
 </suite>
