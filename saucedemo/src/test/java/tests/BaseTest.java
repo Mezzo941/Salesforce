@@ -4,13 +4,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.opera.OperaDriver;
+import org.testng.annotations.*;
 import pages.*;
 
 import java.util.concurrent.TimeUnit;
 
+@Listeners(TestListener.class)
 public abstract class BaseTest {
 
     protected WebDriver driver;
@@ -21,10 +21,16 @@ public abstract class BaseTest {
     protected CheckoutStepTwoPage checkoutStepTwoPage;
     protected CompletePage completePage;
 
-    @BeforeMethod
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
+    @Parameters("browser")
+    @BeforeMethod(groups = "smoke")
+    public void setup(@Optional("chrome") String browser) {
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(new ChromeOptions().addArguments("headless"));
+        } else if (browser.equalsIgnoreCase("opera")) {
+            WebDriverManager.operadriver().setup();
+            driver = new OperaDriver();
+        }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
         catalogPage = new CatalogPage(driver);
@@ -34,7 +40,8 @@ public abstract class BaseTest {
         completePage = new CompletePage(driver);
     }
 
-    @AfterMethod(alwaysRun = true)
+
+    @AfterMethod(alwaysRun = true, groups = "smoke")
     public void tearDown() {
         driver.quit();
     }

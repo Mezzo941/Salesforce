@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="smoke suite" parallel="tests" thread-count="2">
+
+    <listeners>
+        <listener class-name="tests.TestListener"/>
+        <listener class-name="tests.retry.AnnotationTransformer"/>
+    </listeners>
+
+    <test name="smokeChrome">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="tests.CheckoutStepTwoPageTest"/>
+            <parameter name="browser" value="chrome"/>
+        </classes>
+    </test>
+
+    <test name="smokeOpera">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="tests.CheckoutStepTwoPageTest"/>
+            <parameter name="browser" value="opera"/>
+        </classes>
+    </test>
+
+</suite>

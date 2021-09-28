@@ -8,7 +8,7 @@ import static pages.Items.*;
 
 public class CatalogPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "add 1 item to the cart")
     public void oneItemAddedToTheCart() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
@@ -20,7 +20,7 @@ public class CatalogPageTest extends BaseTest {
         Assert.assertEquals(cartPage.getItemPriceFromThePage(SAUCE_LABS_BACKPACK.getName()), SAUCE_LABS_BACKPACK.getPrice());
     }
 
-    @Test
+    @Test(description = "add all items to the cart")
     public void allItemsAddedToTheCart() {
         Items[] itemsArray = Items.values();
         loginPage.open();
@@ -37,7 +37,7 @@ public class CatalogPageTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(description = "add 3 random items to the cart")
     public void threeRandomItemsAddedToTheCart() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
@@ -54,7 +54,7 @@ public class CatalogPageTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(description = "double click button 'add item' on the catalog-page")
     public void twoTimesUseAddItemButtonWillRemoveItemFromTheCart() {
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");

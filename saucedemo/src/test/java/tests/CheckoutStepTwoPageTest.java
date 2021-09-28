@@ -8,7 +8,7 @@ import static pages.Items.*;
 
 public class CheckoutStepTwoPageTest extends BaseTest {
 
-    @Test
+    @Test(description = "check correct total price summed by all items prices before final checkout")
     public void isTotalCorrect() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
@@ -34,7 +34,7 @@ public class CheckoutStepTwoPageTest extends BaseTest {
         Assert.assertEquals(total, checkoutStepTwoPage.getTotal());
     }
 
-    @Test
+    @Test(description = "check correct tax that calculated from summed by all items prices before final checkout")
     public void isTaxCorrect() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
@@ -56,11 +56,11 @@ public class CheckoutStepTwoPageTest extends BaseTest {
             Assert.assertTrue(checkoutStepTwoPage.isItemOnThePage(items.getName()));
             Assert.assertEquals(checkoutStepTwoPage.getItemPriceFromThePage(items.getName()), items.getPrice());
         }
-        Double tax = checkoutStepTwoPage.getItemTotal()*0.08;
+        Double tax = checkoutStepTwoPage.getItemTotal() * 0.08;
         Assert.assertEquals(tax, checkoutStepTwoPage.getTax());
     }
 
-    @Test
+    @Test(description = "check correct total order price that calculated from summed tax and total items prices before final checkout")
     public void isTotalItemCorrect() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         Double totalPrice = 0.0;
@@ -84,11 +84,11 @@ public class CheckoutStepTwoPageTest extends BaseTest {
             Assert.assertTrue(checkoutStepTwoPage.isItemOnThePage(items.getName()));
             Assert.assertEquals(checkoutStepTwoPage.getItemPriceFromThePage(items.getName()), items.getPrice());
         }
-        Assert.assertEquals(checkoutStepTwoPage.getItemTotal(),totalPrice);
+        Assert.assertEquals(checkoutStepTwoPage.getItemTotal(), totalPrice);
     }
 
-    @Test
-    public void afterUseFinishButtonWillCompleteOrder(){
+    @Test(groups = "smoke", description = "check success finishing the order")
+    public void afterUseFinishButtonWillCompleteOrder() {
         Items[] threeRandomItemsArray = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_TSHIRT};
         loginPage.open();
         loginPage.authorization("standard_user", "secret_sauce");
