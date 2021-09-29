@@ -8,6 +8,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTest {
 
     protected WebDriver driver;
@@ -16,13 +18,14 @@ public class BaseTest {
     @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(new ChromeOptions().addArguments(/*"headless"*/));
+        driver = new ChromeDriver(new ChromeOptions().addArguments("start-maximized"));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)
     public void end() {
-       // driver.quit();
+        //driver.quit();
     }
 
 }

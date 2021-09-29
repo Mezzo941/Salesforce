@@ -3,7 +3,7 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginPageTest extends BaseTest{
+public class LoginPageTest extends BaseTest {
 
     /* To easily log in later, save this URL:
     https://company-5a.my.salesforce.com
@@ -16,11 +16,11 @@ public class LoginPageTest extends BaseTest{
     */
 
     @Test
-    public void test1(){
-        Assert.assertTrue(loginPage.openPage().isOpened());
-        loginPage
+    public void LoginIsSuccessful() {
+        Assert.assertTrue(loginPage
                 .openPage()
-                .authorization("asking1234-p1ax@force.com","e0bajj11");
+                .authorization("asking1234-p1ax@force.com","e0bajj11")
+                .isPageOpened()
+        );
     }
-
 }

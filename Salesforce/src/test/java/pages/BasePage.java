@@ -10,6 +10,11 @@ public abstract class BasePage {
         this.driver = driver;
     }
 
-    public abstract boolean isOpened();
+    public Menu openMenu(){
+        return new Menu(driver);
+    }
+
+    public abstract boolean isPageOpened();
+    public abstract BasePage openPage();
 
 }

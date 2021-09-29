@@ -11,16 +11,16 @@ public class LoginPage extends BasePage{
     private final static String BASE_URL = "https://login.salesforce.com";
     private final static By LOGIN_FIELD = By.id("username");
     private final static By PASSWORD_FIELD = By.id("password");
-    private final static By LOGGIN_BUTTON = By.id("Login");
+    private final static By LOGIN_BUTTON = By.id("Login");
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public boolean isOpened() {
+    public boolean isPageOpened() {
         try {
-            new WebDriverWait(driver,3).until(ExpectedConditions.visibilityOfElementLocated(LOGGIN_BUTTON));
+            new WebDriverWait(driver,3).until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         }
         catch(TimeoutException ex) {
             return false;
@@ -28,15 +28,17 @@ public class LoginPage extends BasePage{
         return true;
     }
 
+    @Override
     public LoginPage openPage(){
         driver.get(BASE_URL);
         return this;
     }
 
-    public void authorization(String userName, String password){
+    public HomePage authorization(String userName, String password){
         driver.findElement(LOGIN_FIELD).sendKeys(userName);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
-        driver.findElement(LOGGIN_BUTTON).click();
+        driver.findElement(LOGIN_BUTTON).click();
+        return new HomePage(driver);
     }
 
 }
