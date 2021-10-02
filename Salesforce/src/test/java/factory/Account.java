@@ -4,12 +4,12 @@ import com.github.javafaker.Faker;
 
 public class Account {
 
-    private String accountName;
-    private String phone;
-    private String fax;
-    private String website;
-    private String employees;
-    private String annualRevenue;
+    private final String accountName;
+    private final String phone;
+    private final String fax;
+    private final String website;
+    private final String employees;
+    private final String annualRevenue;
 
     public Account() {
         Faker fake = new Faker();

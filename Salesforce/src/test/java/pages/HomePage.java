@@ -25,10 +25,6 @@ public class HomePage extends BasePage {
         return true;
     }
 
-    @Override
-    public Menu openMenu() {
-        return new Menu(driver);
-    }
 }
 
 

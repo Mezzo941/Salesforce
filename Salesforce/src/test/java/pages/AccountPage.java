@@ -37,7 +37,7 @@ public class AccountPage extends BasePage {
         driver.findElement(SAVE_BUTTON).click();
     }
 
-    public AccountPage createNewAccount() {
+    public void createNewAccount() {
         Account account = new Account();
         clickNew();
         new SInput(driver).setLabel("Account Name").typeText(account.getAccountName());
@@ -47,7 +47,6 @@ public class AccountPage extends BasePage {
         new Input(driver).setLabel("Employees").typeText(account.getEmployees());
         new Input(driver).setLabel("Annual Revenue").typeText(account.getAnnualRevenue());
         clickSave();
-        return this;
     }
 
 }
