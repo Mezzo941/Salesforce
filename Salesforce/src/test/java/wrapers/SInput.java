@@ -12,13 +12,11 @@ public class SInput extends BaseInput {
     }
 
     @Override
-    public BaseInput setLabel(String label) {
-        super.setLabel(label);
-        return this;
-    }
-
-    @Override
     public void typeText(String text) {
         driver.findElement(By.xpath(String.format(SEARCH_INPUT, label))).sendKeys(text);
+    }
+
+    public void search(){
+        //search
     }
 }

@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class BaseInput {
 
-    WebDriver driver;
-    String label;
+    protected WebDriver driver;
+    protected String label;
 
     public BaseInput(WebDriver driver) {
         this.driver = driver;

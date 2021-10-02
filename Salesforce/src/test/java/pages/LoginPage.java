@@ -28,7 +28,6 @@ public class LoginPage extends BasePage{
         return true;
     }
 
-    @Override
     public LoginPage openPage(){
         driver.get(BASE_URL);
         return this;

@@ -13,13 +13,8 @@ public class Input extends BaseInput{
     }
 
     @Override
-    public BaseInput setLabel(String label) {
-        super.setLabel(label);
-        return this;
-    }
-
-    @Override
     public void typeText(String text) {
         driver.findElement(By.xpath(String.format(INPUT,label))).sendKeys(text);
     }
+
 }

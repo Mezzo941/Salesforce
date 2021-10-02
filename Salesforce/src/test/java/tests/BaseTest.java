@@ -25,7 +25,7 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void end() {
-        //driver.quit();
+        driver.quit();
     }
 
 }

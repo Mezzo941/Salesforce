@@ -8,21 +8,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
 
-    private static final By FLEX_PAGE = By.cssSelector("[class=flexipagePage]");
+    private static final By HOME_PAGE = By.cssSelector("[class=flexipagePage]");
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    @Override
-    public BasePage openPage() {
-        return null;
-    }
 
     @Override
     public boolean isPageOpened() {
         try {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(FLEX_PAGE));
+            new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(HOME_PAGE));
         } catch (TimeoutException exception) {
             return false;
         }
