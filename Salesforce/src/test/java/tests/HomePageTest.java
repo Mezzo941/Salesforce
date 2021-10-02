@@ -10,9 +10,8 @@ public class HomePageTest extends BaseTest {
                 .openPage()
                 .authorization("asking1234-p1ax@force.com", "e0bajj11")
                 .openMenu()
-                .Accounts().createNewAccount();
+                .Accounts()
+                .createNewAccount();
     }
-
-
 
 }
